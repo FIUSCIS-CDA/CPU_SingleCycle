@@ -2,10 +2,11 @@
 module testbenchBubble();
 // Approximating clock period as 100+100 (two accesses to RAM) + 100 (everything else)
    reg clk_tb, rst_tb;
+   wire Overflow;
    
    localparam CLK_PERIOD = 300;
    
-   CPU_SingleCycle myCPU(clk_tb, rst_tb);
+   CPU_SingleCycle myCPU(clk_tb, rst_tb, Overflow);
    
    initial begin
       // initialize instruction memory
@@ -36,6 +37,9 @@ module testbenchBubble();
       myCPU.b2v_im.memory[22] = 'b00001000000000000000000000001001; // j loop2 //instruction 9
       myCPU.b2v_im.memory[23] = 'b00100010010100101111111111111111; //doneloop2: addi $s2, $s2, -1
       myCPU.b2v_im.memory[24] = 'b00001000000000000000000000000110; // j loop1 //instruction 6
+     myCPU.b2v_im.memory[25] = 'b10001100000010000000001000110000; // lw $t0, 560($zero)
+      myCPU.b2v_im.memory[26] = 'b00100001000010000000000000000001; // addi $t0, $t0, 1
+
       // doneloop1:
       // Next instruction, uses myCPU.b2v_im.memory[4]
 
@@ -55,6 +59,7 @@ module testbenchBubble();
       myCPU.b2v_dm.memory[548 >> 2] = 66;
       myCPU.b2v_dm.memory[552 >> 2] = 121;
       myCPU.b2v_dm.memory[556 >> 2] = 44;
+      myCPU.b2v_dm.memory[560 >> 2] = 2**31 - 1;  // Big number
       rst_tb <= 1;  # (CLK_PERIOD/2);
       rst_tb <= 0; 
    end
@@ -69,11 +74,18 @@ module testbenchBubble();
    
 
   always@(posedge clk_tb)
+
     begin
+
+
         //////////////////////////////////////////////////
         // CHANGE PC VALUE IN THIS IF STATEMENT
         // ADD 4 TIMES THE AMOUNT OF INSTRUCTIONS YOU RUN
-        if(myCPU.b2v_PC.Q === 100) begin
+        if(myCPU.b2v_PC.Q === 104) begin
+	if (myCPU.Overflow == 0) begin
+	     $display("Error: Expected overflow when adding 2**31+1");
+             $stop;
+        end
         //////////////////////////////////////////////////
         // CHANGE THIS TEST
         // CURRENT TEST ASSUMES YOU SWAPPED THE THIRD AND SIXTH
@@ -100,6 +112,10 @@ module testbenchBubble();
              $stop;
            end
        end
+	else if (myCPU.Overflow == 1) begin
+	     $display("Error: Did not expect overflow during the regular MIPS program");
+             $stop;
+        end
    end
  
 endmodule

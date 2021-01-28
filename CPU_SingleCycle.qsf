@@ -60,7 +60,6 @@ set_global_assignment -name BDF_FILE ../SE18_32/SE18_32.bdf
 set_global_assignment -name BDF_FILE ../SPLICE_SL2/SPLICE_SL2.bdf
 set_global_assignment -name BDF_FILE ../MUX2_5/MUX2_5.bdf
 set_global_assignment -name BDF_FILE ../MUX2_32/MUX2_32.bdf
-set_global_assignment -name VERILOG_FILE ../DM/DM.v
 set_global_assignment -name BDF_FILE ../SE16_32/SE16_32.bdf
 set_global_assignment -name BDF_FILE ../SameBit/SameBit.bdf
 set_global_assignment -name BDF_FILE ../MUX2/MUX2.bdf
@@ -74,8 +73,6 @@ set_global_assignment -name BDF_FILE ../OneBitAdder/OneBitAdder.bdf
 set_global_assignment -name BDF_FILE ../MUX3/MUX3.bdf
 set_global_assignment -name BDF_FILE ../Flopr/Flopr.bdf
 set_global_assignment -name BDF_FILE ../DSwitch/DSwitch.bdf
-set_global_assignment -name BDF_FILE ../CTRL/CTRL.bdf
-set_global_assignment -name BDF_FILE ../ALU32/ALU32.bdf
 set_global_assignment -name BDF_FILE ../RF/RF.bdf
 set_global_assignment -name BDF_FILE ../Flopenr_32/Flopenr_32.bdf
 set_global_assignment -name BDF_FILE ../MUX32_32/MUX32_32.bdf
@@ -83,7 +80,11 @@ set_global_assignment -name BDF_FILE ../MUX32/MUX32.bdf
 set_global_assignment -name BDF_FILE ../Decoder_32/Decoder_32.bdf
 set_global_assignment -name BDF_FILE ../Flopenr/Flopenr.bdf
 set_global_assignment -name BDF_FILE ../DESwitch/DESwitch.bdf
-set_global_assignment -name BDF_FILE ../ALU32/ALUBit31.bdf
 set_global_assignment -name BDF_FILE ../ALU32/ALUBits0To30.bdf
 set_global_assignment -name BDF_FILE ../MUX4/MUX4.bdf
+set_global_assignment -name BDF_FILE CTRL.bdf
+set_global_assignment -name VERILOG_FILE ../DM/DM_synch.v
+set_global_assignment -name BDF_FILE ../ALU32/ALUBit31.bdf
+set_global_assignment -name BDF_FILE ../ALU32/ALU32.bdf
+set_global_assignment -name BDF_FILE ../ALU32/OverflowDetection.bdf
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

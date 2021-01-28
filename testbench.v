@@ -1,5 +1,5 @@
 `timescale 1ps / 1ps
-module testbenchBubble();
+module testbench();
 // Approximating clock period as 100+100 (two accesses to RAM) + 100 (everything else)
    reg clk_tb, rst_tb;
    wire Overflow;
@@ -47,19 +47,19 @@ module testbenchBubble();
 
 
       // Initialized array manually
-      myCPU.b2v_dm.memory[512 >> 2] = 55;
-      myCPU.b2v_dm.memory[516 >> 2] = 88;
-      myCPU.b2v_dm.memory[520 >> 2] = 0;
-      myCPU.b2v_dm.memory[524 >> 2] = 22;
-      myCPU.b2v_dm.memory[528 >> 2] = 77;
-      myCPU.b2v_dm.memory[532 >> 2] = 11;
-      myCPU.b2v_dm.memory[536 >> 2] = 99;
-      myCPU.b2v_dm.memory[540 >> 2] = 33;
-      myCPU.b2v_dm.memory[544 >> 2] = 110;
-      myCPU.b2v_dm.memory[548 >> 2] = 66;
-      myCPU.b2v_dm.memory[552 >> 2] = 121;
-      myCPU.b2v_dm.memory[556 >> 2] = 44;
-      myCPU.b2v_dm.memory[560 >> 2] = 2**31 - 1;  // Big number
+      myCPU.b2v_DM.memory[512 >> 2] = 55;
+      myCPU.b2v_DM.memory[516 >> 2] = 88;
+      myCPU.b2v_DM.memory[520 >> 2] = 0;
+      myCPU.b2v_DM.memory[524 >> 2] = 22;
+      myCPU.b2v_DM.memory[528 >> 2] = 77;
+      myCPU.b2v_DM.memory[532 >> 2] = 11;
+      myCPU.b2v_DM.memory[536 >> 2] = 99;
+      myCPU.b2v_DM.memory[540 >> 2] = 33;
+      myCPU.b2v_DM.memory[544 >> 2] = 110;
+      myCPU.b2v_DM.memory[548 >> 2] = 66;
+      myCPU.b2v_DM.memory[552 >> 2] = 121;
+      myCPU.b2v_DM.memory[556 >> 2] = 44;
+      myCPU.b2v_DM.memory[560 >> 2] = 2**31 - 1;  // Big number
       rst_tb <= 1;  # (CLK_PERIOD/2);
       rst_tb <= 0; 
    end
@@ -90,17 +90,17 @@ module testbenchBubble();
         // CHANGE THIS TEST
         // CURRENT TEST ASSUMES YOU SWAPPED THE THIRD AND SIXTH
           if ( 
-             (myCPU.b2v_dm.memory[512 >> 2] < myCPU.b2v_dm.memory[516 >> 2]) &&
-             (myCPU.b2v_dm.memory[516 >> 2] < myCPU.b2v_dm.memory[520 >> 2]) &&
-             (myCPU.b2v_dm.memory[520 >> 2] < myCPU.b2v_dm.memory[524 >> 2]) &&
-             (myCPU.b2v_dm.memory[524 >> 2] < myCPU.b2v_dm.memory[528 >> 2]) &&
-             (myCPU.b2v_dm.memory[528 >> 2] < myCPU.b2v_dm.memory[532 >> 2]) &&
-             (myCPU.b2v_dm.memory[532 >> 2] < myCPU.b2v_dm.memory[536 >> 2]) &&
-             (myCPU.b2v_dm.memory[536 >> 2] < myCPU.b2v_dm.memory[540 >> 2]) &&
-             (myCPU.b2v_dm.memory[540 >> 2] < myCPU.b2v_dm.memory[544 >> 2]) &&
-             (myCPU.b2v_dm.memory[544 >> 2] < myCPU.b2v_dm.memory[548 >> 2]) &&
-             (myCPU.b2v_dm.memory[548 >> 2] < myCPU.b2v_dm.memory[552 >> 2]) &&
-             (myCPU.b2v_dm.memory[552 >> 2] < myCPU.b2v_dm.memory[556 >> 2])  )
+             (myCPU.b2v_DM.memory[512 >> 2] < myCPU.b2v_DM.memory[516 >> 2]) &&
+             (myCPU.b2v_DM.memory[516 >> 2] < myCPU.b2v_DM.memory[520 >> 2]) &&
+             (myCPU.b2v_DM.memory[520 >> 2] < myCPU.b2v_DM.memory[524 >> 2]) &&
+             (myCPU.b2v_DM.memory[524 >> 2] < myCPU.b2v_DM.memory[528 >> 2]) &&
+             (myCPU.b2v_DM.memory[528 >> 2] < myCPU.b2v_DM.memory[532 >> 2]) &&
+             (myCPU.b2v_DM.memory[532 >> 2] < myCPU.b2v_DM.memory[536 >> 2]) &&
+             (myCPU.b2v_DM.memory[536 >> 2] < myCPU.b2v_DM.memory[540 >> 2]) &&
+             (myCPU.b2v_DM.memory[540 >> 2] < myCPU.b2v_DM.memory[544 >> 2]) &&
+             (myCPU.b2v_DM.memory[544 >> 2] < myCPU.b2v_DM.memory[548 >> 2]) &&
+             (myCPU.b2v_DM.memory[548 >> 2] < myCPU.b2v_DM.memory[552 >> 2]) &&
+             (myCPU.b2v_DM.memory[552 >> 2] < myCPU.b2v_DM.memory[556 >> 2])  )
 
 
  begin

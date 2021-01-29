@@ -1,12 +1,12 @@
 `timescale 1ps / 1ps
 module testbench();
 // Approximating clock period as 100+100 (two accesses to RAM) + 100 (everything else)
-   reg clk_tb, rst_tb;
+   reg clk, rst;
    wire Overflow;
    
-   localparam CLK_PERIOD = 300;
+   localparam CLK_PERIOD = 200;
    
-   CPU_SingleCycle myCPU(clk_tb, rst_tb, Overflow);
+   CPU_SingleCycle myCPU(clk, rst, Overflow);
    
    initial begin
       // initialize instruction memory
@@ -60,20 +60,20 @@ module testbench();
       myCPU.b2v_DM.memory[552 >> 2] = 121;
       myCPU.b2v_DM.memory[556 >> 2] = 44;
       myCPU.b2v_DM.memory[560 >> 2] = 2**31 - 1;  // Big number
-      rst_tb <= 1;  # (CLK_PERIOD/2);
-      rst_tb <= 0; 
+      rst <= 1;  # (CLK_PERIOD/2);
+      rst <= 0; 
    end
 
 
    // Generate clock
    always @*
    begin
-      clk_tb <= 1;       # (CLK_PERIOD/2);
-      clk_tb <= 0;       # (CLK_PERIOD/2);
+      clk <= 1;       # (CLK_PERIOD/2);
+      clk <= 0;       # (CLK_PERIOD/2);
    end
    
 
-  always@(posedge clk_tb)
+  always@(posedge clk)
 
     begin
 

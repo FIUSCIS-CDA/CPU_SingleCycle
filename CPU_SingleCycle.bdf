@@ -1064,26 +1064,6 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 1272 320)
-	(pt 1296 320)
-)
-(connector
-	(pt 1296 320)
-	(pt 1296 616)
-)
-(connector
-	(pt 1296 616)
-	(pt -56 616)
-)
-(connector
-	(pt -56 616)
-	(pt -56 376)
-)
-(connector
-	(pt -56 376)
-	(pt 96 376)
-)
-(connector
 	(pt 400 440)
 	(pt 400 584)
 	(bus)
@@ -1432,6 +1412,27 @@ refer to the applicable agreement for further details.
 	(pt 1600 64)
 	(pt 1600 248)
 	(bus)
+)
+(connector
+	(pt 1272 320)
+	(pt 1296 320)
+)
+(connector
+	(pt 1296 320)
+	(pt 1296 616)
+)
+(connector
+	(text "eq" (rect -54 600 -43 617)(font "Intel Clear" ))
+	(pt 1296 616)
+	(pt -56 616)
+)
+(connector
+	(pt -56 616)
+	(pt -56 376)
+)
+(connector
+	(pt -56 376)
+	(pt 96 376)
 )
 (junction (pt 448 296))
 (junction (pt 448 264))

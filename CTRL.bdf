@@ -55,7 +55,7 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect 568 1008 736 1024)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "eq" (rect 5 0 17 12)(font "Arial" ))
+	(text "eq" (rect 5 0 16 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -1163,28 +1163,6 @@ refer to the applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 864 1248 960 1344)
-	(text "SameBit" (rect 5 0 55 19)(font "Intel Clear" (font_size 8)))
-	(text "inst32" (rect 8 75 36 92)(font "Intel Clear" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "Ain" (rect 0 0 18 19)(font "Intel Clear" (font_size 8)))
-		(text "Ain" (rect 21 27 39 46)(font "Intel Clear" (font_size 8)))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 96 32)
-		(output)
-		(text "Aout" (rect 0 0 27 19)(font "Intel Clear" (font_size 8)))
-		(text "Aout" (rect 48 27 75 46)(font "Intel Clear" (font_size 8)))
-		(line (pt 96 32)(pt 80 32))
-	)
-	(drawing
-		(rectangle (rect 16 16 80 80))
-	)
-)
-(symbol
 	(rect -40 1504 8 1536)
 	(text "NOT" (rect 1 0 21 10)(font "Arial" (font_size 6)))
 	(text "inst28" (rect 3 21 31 38)(font "Intel Clear" ))
@@ -2136,6 +2114,28 @@ refer to the applicable agreement for further details.
 		(circle (rect 31 12 39 20))
 	)
 )
+(symbol
+	(rect 864 1248 960 1344)
+	(text "SameBit" (rect 5 0 55 19)(font "Intel Clear" (font_size 8)))
+	(text "sameBitUnit" (rect 8 75 65 92)(font "Intel Clear" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "Ain" (rect 0 0 18 19)(font "Intel Clear" (font_size 8)))
+		(text "Ain" (rect 21 27 39 46)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 96 32)
+		(output)
+		(text "Aout" (rect 0 0 27 19)(font "Intel Clear" (font_size 8)))
+		(text "Aout" (rect 48 27 75 46)(font "Intel Clear" (font_size 8)))
+		(line (pt 96 32)(pt 80 32))
+	)
+	(drawing
+		(rectangle (rect 16 16 80 80))
+	)
+)
 (connector
 	(pt 288 80)
 	(pt 320 80)
@@ -2406,14 +2406,6 @@ refer to the applicable agreement for further details.
 	(pt 368 448)
 )
 (connector
-	(pt 776 536)
-	(pt 832 536)
-)
-(connector
-	(pt 832 512)
-	(pt 992 512)
-)
-(connector
 	(pt 624 496)
 	(pt 624 616)
 )
@@ -2556,22 +2548,6 @@ refer to the applicable agreement for further details.
 (connector
 	(pt 368 448)
 	(pt 368 576)
-)
-(connector
-	(pt 816 312)
-	(pt 816 240)
-)
-(connector
-	(pt 816 240)
-	(pt 776 240)
-)
-(connector
-	(pt 776 240)
-	(pt 776 200)
-)
-(connector
-	(pt 776 200)
-	(pt 800 200)
 )
 (connector
 	(pt 624 152)
@@ -3733,48 +3709,8 @@ refer to the applicable agreement for further details.
 	(pt 664 536)
 )
 (connector
-	(pt 792 312)
-	(pt 792 440)
-)
-(connector
 	(pt 1104 448)
 	(pt 1152 448)
-)
-(connector
-	(pt 768 312)
-	(pt 792 312)
-)
-(connector
-	(pt 792 312)
-	(pt 816 312)
-)
-(connector
-	(pt 792 440)
-	(pt 1040 440)
-)
-(connector
-	(pt 832 480)
-	(pt 872 480)
-)
-(connector
-	(pt 832 480)
-	(pt 832 512)
-)
-(connector
-	(pt 832 512)
-	(pt 832 536)
-)
-(connector
-	(pt 936 472)
-	(pt 960 472)
-)
-(connector
-	(pt 960 472)
-	(pt 960 456)
-)
-(connector
-	(pt 960 456)
-	(pt 1040 456)
 )
 (connector
 	(pt 392 472)
@@ -3799,6 +3735,72 @@ refer to the applicable agreement for further details.
 (connector
 	(pt 832 464)
 	(pt 872 464)
+)
+(connector
+	(pt 816 240)
+	(pt 776 240)
+)
+(connector
+	(pt 776 240)
+	(pt 776 200)
+)
+(connector
+	(pt 776 200)
+	(pt 800 200)
+)
+(connector
+	(pt 792 312)
+	(pt 792 440)
+)
+(connector
+	(pt 768 312)
+	(pt 792 312)
+)
+(connector
+	(pt 792 312)
+	(pt 816 312)
+)
+(connector
+	(pt 792 440)
+	(pt 1040 440)
+)
+(connector
+	(pt 832 512)
+	(pt 992 512)
+)
+(connector
+	(pt 832 480)
+	(pt 872 480)
+)
+(connector
+	(pt 832 480)
+	(pt 832 512)
+)
+(connector
+	(pt 832 512)
+	(pt 832 536)
+)
+(connector
+	(pt 776 536)
+	(pt 832 536)
+)
+(connector
+	(pt 936 472)
+	(pt 960 472)
+)
+(connector
+	(pt 960 472)
+	(pt 960 456)
+)
+(connector
+	(text "<<__$DEF_ALIAS37397>>" (rect 970 440 1093 457)(font "Intel Clear" )(invisible))
+	(pt 960 456)
+	(pt 1040 456)
+)
+(connector
+	(text "<<__$DEF_ALIAS37399>>" (rect 800 245 817 368)(font "Intel Clear" )(vertical)(invisible))
+	(pt 816 312)
+	(pt 816 240)
 )
 (junction (pt 320 96))
 (junction (pt 320 120))

@@ -1,6 +1,6 @@
 `timescale 1ps / 1ps
 module testbench();
-// Approximating clock period as 100+100 (two accesses to RAM) + 100 (everything else)
+// Approximating clock period as 100+100 (two accesses to RAM)
    reg clk, rst;
    wire Overflow;
    

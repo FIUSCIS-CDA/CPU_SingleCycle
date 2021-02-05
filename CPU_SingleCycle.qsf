@@ -87,4 +87,5 @@ set_global_assignment -name VERILOG_FILE ../DM/DM_synch.v
 set_global_assignment -name BDF_FILE ../ALU32/ALUBit31.bdf
 set_global_assignment -name BDF_FILE ../ALU32/ALU32.bdf
 set_global_assignment -name BDF_FILE ../ALU32/OverflowDetection.bdf
+set_global_assignment -name BDF_FILE ../Grounder/Grounder.bdf
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

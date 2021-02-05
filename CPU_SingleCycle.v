@@ -1,32 +1,35 @@
-// Copyright (C) 1991-2015 Altera Corporation. All rights reserved.
-// Your use of Altera Corporation's design tools, logic functions 
+// Copyright (C) 2018  Intel Corporation. All rights reserved.
+// Your use of Intel Corporation's design tools, logic functions 
 // and other software and tools, and its AMPP partner logic 
 // functions, and any output files from any of the foregoing 
 // (including device programming or simulation files), and any 
 // associated documentation or information are expressly subject 
-// to the terms and conditions of the Altera Program License 
-// Subscription Agreement, the Altera Quartus II License Agreement,
-// the Altera MegaCore Function License Agreement, or other 
-// applicable license agreement, including, without limitation, 
-// that your use is for the sole purpose of programming logic 
-// devices manufactured by Altera and sold by Altera or its 
-// authorized distributors.  Please refer to the applicable 
-// agreement for further details.
+// to the terms and conditions of the Intel Program License 
+// Subscription Agreement, the Intel Quartus Prime License Agreement,
+// the Intel FPGA IP License Agreement, or other applicable license
+// agreement, including, without limitation, that your use is for
+// the sole purpose of programming logic devices manufactured by
+// Intel and sold by Intel or its authorized distributors.  Please
+// refer to the applicable agreement for further details.
 
-// PROGRAM		"Quartus II 64-Bit"
-// VERSION		"Version 15.0.0 Build 145 04/22/2015 SJ Web Edition"
-// CREATED		"Tue Feb  2 07:26:07 2021"
+// PROGRAM		"Quartus Prime"
+// VERSION		"Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition"
+// CREATED		"Fri Feb 05 08:15:35 2021"
 
 module CPU_SingleCycle(
 	clk,
 	reset,
-	Overflow
+	Overflow,
+	OPCODE,
+	PC
 );
 
 
 input wire	clk;
 input wire	reset;
 output wire	Overflow;
+output wire	[31:26] OPCODE;
+output wire	[31:0] PC;
 
 wire	[31:0] add1;
 wire	[31:0] add2;
@@ -110,19 +113,19 @@ ALU32	b2v_myALU(
 	.Result(add_sum));
 
 
-Flopr_32	b2v_PC(
-	.reset(reset),
-	.clk(clk),
-	.D(pc_new),
-	.Q(pc_out));
-
-
 MUX3_32	b2v_pcMUX(
 	.A(pc_inc4),
 	.B(pc_j),
 	.C(pc_beq),
 	.S(pc_s),
 	.Y(pc_new));
+
+
+Flopr_32	b2v_PCREG(
+	.reset(reset),
+	.clk(clk),
+	.D(pc_new),
+	.Q(pc_out));
 
 
 RF	b2v_rf(
@@ -171,5 +174,7 @@ SPLICE_PCJ	b2v_spliceUnitforPC(
 	.pc31_28(pc_out[31:28]),
 	.Y(pc_j));
 
+assign	OPCODE[31:26] = ir[31:26];
+assign	PC = pc_out;
 
 endmodule

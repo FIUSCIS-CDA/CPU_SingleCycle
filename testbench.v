@@ -1,12 +1,23 @@
 `timescale 1ps / 1ps
+
+
+
+
 module testbench();
+
+
 // Approximating clock period as 100+100 (two accesses to RAM)
    reg clk, rst;
    wire Overflow;
-   
+   wire[31:0] PC;
+   wire[31:26] OPCODE;
+
+
+
+
    localparam CLK_PERIOD = 200;
    
-   CPU_SingleCycle myCPU(clk, rst, Overflow);
+   CPU_SingleCycle myCPU(clk, rst, Overflow, OPCODE, PC);
    
    initial begin
       // initialize instruction memory
@@ -81,8 +92,8 @@ module testbench();
         //////////////////////////////////////////////////
         // CHANGE PC VALUE IN THIS IF STATEMENT
         // ADD 4 TIMES THE AMOUNT OF INSTRUCTIONS YOU RUN
-        if(myCPU.b2v_PC.Q === 104) begin
-	if (myCPU.Overflow == 0) begin
+        if(PC === 104) begin
+	if (Overflow == 0) begin
 	     $display("Error: Expected overflow when adding 2**31+1");
              $stop;
         end
@@ -112,7 +123,7 @@ module testbench();
              $stop;
            end
        end
-	else if (myCPU.Overflow == 1) begin
+	else if (Overflow == 1) begin
 	     $display("Error: Did not expect overflow during the regular MIPS program");
              $stop;
         end

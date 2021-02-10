@@ -1,8 +1,4 @@
-`timescale 1ps / 1ps
-
-
-
-
+//`timescale 1ps / 1ps
 module testbench();
 
 
@@ -50,7 +46,6 @@ module testbench();
       myCPU.b2v_im.memory[24] = 'b00001000000000000000000000000110; // j loop1 //instruction 6
      myCPU.b2v_im.memory[25] = 'b10001100000010000000001000110000; // lw $t0, 560($zero)
       myCPU.b2v_im.memory[26] = 'b00100001000010000000000000000001; // addi $t0, $t0, 1
-
       // doneloop1:
       // Next instruction, uses myCPU.b2v_im.memory[4]
 
@@ -84,7 +79,7 @@ module testbench();
    end
    
 
-  always@(posedge clk)
+  always@(negedge clk)
 
     begin
 
@@ -95,7 +90,7 @@ module testbench();
         if(PC === 104) begin
 	if (Overflow == 0) begin
 	     $display("Error: Expected overflow when adding 2**31+1");
-             $stop;
+             //$stop;
         end
         //////////////////////////////////////////////////
         // CHANGE THIS TEST

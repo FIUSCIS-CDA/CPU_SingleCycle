@@ -27,9 +27,11 @@ module testbench();
       myCPU.b2v_im.memory[5] = 'b00100000000011010000000000000001; // addi $t5, $zero, 1
       myCPU.b2v_im.memory[6] = 'b00000000000100100100000000101010; // loop1:   slt $t0, $zero, $s2 
       myCPU.b2v_im.memory[7] = 'b00010001000000000000000000010001; // beq $t0, $zero, doneloop1
+      //myCPU.b2v_im.memory[7] = 'b00010101000011010000000000010001; // bne $t0, $t5, doneloop1
       myCPU.b2v_im.memory[8] = 'b00100000000100110000000000000000; // addi $s3, $zero, 0
       myCPU.b2v_im.memory[9] = 'b00000010011100100100100000101010; // loop2:   slt $t1, $s3, $s2
       myCPU.b2v_im.memory[10] = 'b00010001001000000000000000001100; // beq $t1, $zero, doneloop2
+      //myCPU.b2v_im.memory[10] = 'b00010101001011010000000000001100; // bne $t1, $t5, doneloop2
       myCPU.b2v_im.memory[11] = 'b00000010011100110101000000100000; // add $t2, $s3, $s3
       myCPU.b2v_im.memory[12] = 'b00000001010010100101000000100000; // add $t2, $t2, $t2
       myCPU.b2v_im.memory[13] = 'b00000010000010100101100000100000; // add $t3, $s0, $t2
@@ -37,6 +39,7 @@ module testbench();
       myCPU.b2v_im.memory[15] = 'b10001101011101010000000000000100; // lw $s5, 4($t3)
       myCPU.b2v_im.memory[16] = 'b00000010101101000110000000101010; // slt $t4, $s5, $s4 
       myCPU.b2v_im.memory[17] = 'b00010001100000000000000000000011; // beq $t4, $zero, doneif
+      //myCPU.b2v_im.memory[17] = 'b00010001100011010000000000000011; // bne $t4, $t5, doneif
       myCPU.b2v_im.memory[18] = 'b10101101011101010000000000000000; // sw $s5, 0($t3)
       myCPU.b2v_im.memory[19] = 'b00100001011010110000000000000100; // addi $t3, $t3, 4
       myCPU.b2v_im.memory[20] = 'b10101101011101000000000000000000; // sw $s4, 0($t3)

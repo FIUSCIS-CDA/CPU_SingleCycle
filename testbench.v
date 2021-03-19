@@ -39,7 +39,7 @@ module testbench();
       myCPU.b2v_im.memory[15] = 'b10001101011101010000000000000100; // lw $s5, 4($t3)
       myCPU.b2v_im.memory[16] = 'b00000010101101000110000000101010; // slt $t4, $s5, $s4 
       myCPU.b2v_im.memory[17] = 'b00010001100000000000000000000011; // beq $t4, $zero, doneif
-      //myCPU.b2v_im.memory[17] = 'b00010001100011010000000000000011; // bne $t4, $t5, doneif
+      //myCPU.b2v_im.memory[17] = 'b0001011100011010000000000000011; // bne $t4, $t5, doneif
       myCPU.b2v_im.memory[18] = 'b10101101011101010000000000000000; // sw $s5, 0($t3)
       myCPU.b2v_im.memory[19] = 'b00100001011010110000000000000100; // addi $t3, $t3, 4
       myCPU.b2v_im.memory[20] = 'b10101101011101000000000000000000; // sw $s4, 0($t3)

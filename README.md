@@ -23,6 +23,19 @@ OPCODE	|	32
 #### DESCRIPTION
        CPU_SingleCycle Single-cycle MIPS CPU
 
+#### SUPPORTED INSTRUCTIONS
+       BNE (SP21)
+       ADDI (FA20)
+       J
+       BEQ
+       LW
+       SW
+       ADD
+       SUB
+       AND
+       OR
+       SLT
+
 #### AUTHOR
        Alexander T Pastoriza
        Trevor Cickovski

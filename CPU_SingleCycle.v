@@ -1,6 +1,6 @@
-// Copyright (C) 2018  Intel Corporation. All rights reserved.
+// Copyright (C) 2020  Intel Corporation. All rights reserved.
 // Your use of Intel Corporation's design tools, logic functions 
-// and other software and tools, and its AMPP partner logic 
+// and other software and tools, and any partner logic 
 // functions, and any output files from any of the foregoing 
 // (including device programming or simulation files), and any 
 // associated documentation or information are expressly subject 
@@ -10,11 +10,12 @@
 // agreement, including, without limitation, that your use is for
 // the sole purpose of programming logic devices manufactured by
 // Intel and sold by Intel or its authorized distributors.  Please
-// refer to the applicable agreement for further details.
+// refer to the applicable agreement for further details, at
+// https://fpgasoftware.intel.com/eula.
 
 // PROGRAM		"Quartus Prime"
-// VERSION		"Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition"
-// CREATED		"Fri Feb 05 08:15:35 2021"
+// VERSION		"Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition"
+// CREATED		"Tue May 17 14:44:56 2022"
 
 module CPU_SingleCycle(
 	clk,
@@ -98,19 +99,19 @@ INC4_32	b2v_inc4(
 	.S(pc_inc4));
 
 
+ALU_32	b2v_inst(
+	.A(add1),
+	.alu_op(alu_op),
+	.B(add2),
+	.Overflow(Overflow),
+	.Zero(eq),
+	.Result(add_sum));
+
+
 Adder_32	b2v_myAdder(
 	.A(pc_inc4),
 	.B(offset_times_4_se),
 	.S(pc_beq));
-
-
-ALU32	b2v_myALU(
-	.A(add1),
-	.alu_op(alu_op),
-	.B(add2),
-	.eq(eq),
-	.Overflow(Overflow),
-	.Result(add_sum));
 
 
 MUX3_32	b2v_pcMUX(

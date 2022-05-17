@@ -41,7 +41,7 @@ set_global_assignment -name DEVICE 5CGXFC7C7F23C8
 set_global_assignment -name TOP_LEVEL_ENTITY CPU_SingleCycle
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 18.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "08:41:01  AUGUST 21, 2020"
-set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
+set_global_assignment -name LAST_QUARTUS_VERSION "20.1.1 Lite Edition"
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
@@ -80,12 +80,12 @@ set_global_assignment -name BDF_FILE ../MUX32/MUX32.bdf
 set_global_assignment -name BDF_FILE ../Decoder_32/Decoder_32.bdf
 set_global_assignment -name BDF_FILE ../Flopenr/Flopenr.bdf
 set_global_assignment -name BDF_FILE ../DESwitch/DESwitch.bdf
-set_global_assignment -name BDF_FILE ../ALU32/ALUBits0To30.bdf
+set_global_assignment -name BDF_FILE ../ALU_32/ALUBits0To30.bdf
 set_global_assignment -name BDF_FILE ../MUX4/MUX4.bdf
 set_global_assignment -name BDF_FILE CTRL.bdf
 set_global_assignment -name VERILOG_FILE ../DM/DM_synch.v
-set_global_assignment -name BDF_FILE ../ALU32/ALUBit31.bdf
-set_global_assignment -name BDF_FILE ../ALU32/ALU32.bdf
-set_global_assignment -name BDF_FILE ../ALU32/OverflowDetection.bdf
+set_global_assignment -name BDF_FILE ../ALU_32/ALUBit31.bdf
+set_global_assignment -name BDF_FILE ../ALU_32/ALU_32.bdf
+set_global_assignment -name BDF_FILE ../ALU_32/OverflowDetection.bdf
 set_global_assignment -name BDF_FILE ../Grounder/Grounder.bdf
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

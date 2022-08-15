@@ -165,7 +165,7 @@ SE18_32	b2v_signExt(
 	.Y(offset_times_4_se));
 
 
-SPLICE_SL2	b2v_spliceUnit(
+SL2_16	b2v_spliceUnit(
 	.A(ir[15:0]),
 	.Y(offset_times_4));
 

@@ -496,7 +496,7 @@ https://fpgasoftware.intel.com/eula.
 )
 (symbol
 	(rect 1384 520 1536 616)
-	(text "SPLICE_SL2" (rect 5 0 78 19)(font "Intel Clear" (color 255 255 255)(font_size 8)))
+	(text "SL2_16" (rect 5 0 78 19)(font "Intel Clear" (color 255 255 255)(font_size 8)))
 	(text "spliceUnit" (rect 8 75 54 92)(font "Intel Clear" (color 255 255 255)))
 	(port
 		(pt 0 32)

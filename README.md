@@ -2,7 +2,7 @@
        CPU_SingleCycle
 
 #### DEPENDENCIES
-       SE18_32, SPLICE_SL2, MUX2_5, MUX2_32, SE16_32, SameBit, MUX2, Flopr_32,
+       SE18_32, SL2_16, MUX2_5, MUX2_32, SE16_32, SameBit, MUX2, Flopr_32,
        MUX3_32,  INC4_32,  SPLICE_PCJ,  Adder_32,  OneBitAdder,  MUX3,  Flopr,
        DSwitch,  CTRL,  ALU_32,  RF,  Flopenr_32,  MUX32_32, MUX32, Decoder_32,
        Flopenr, DESwitch, ALUBit31, ALUBits0To30, MUX4, DM_synch, Grounder, IM,

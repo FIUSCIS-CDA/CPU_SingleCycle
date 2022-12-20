@@ -15,7 +15,7 @@
 
 // PROGRAM		"Quartus Prime"
 // VERSION		"Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition"
-// CREATED		"Tue May 17 14:44:49 2022"
+// CREATED		"Tue Dec 20 14:12:33 2022"
 
 module CTRL(
 	eq,
@@ -24,10 +24,10 @@ module CTRL(
 	rf_wa_s,
 	rf_we,
 	add2_s,
-	rf_wd_s,
 	dm_we,
 	alu_op,
-	pc_s
+	pc_s,
+	rf_wd_s
 );
 
 
@@ -37,13 +37,14 @@ input wire	[5:0] ir5_0;
 output wire	rf_wa_s;
 output wire	rf_we;
 output wire	add2_s;
-output wire	rf_wd_s;
 output wire	dm_we;
 output wire	[4:0] alu_op;
 output wire	[1:0] pc_s;
+output wire	[1:0] rf_wd_s;
 
 wire	[4:0] alu_op_ALTERA_SYNTHESIZED;
 wire	[1:0] pc_s_ALTERA_SYNTHESIZED;
+wire	[1:0] rf_wd_s_ALTERA_SYNTHESIZED;
 wire	SYNTHESIZED_WIRE_0;
 wire	SYNTHESIZED_WIRE_1;
 wire	SYNTHESIZED_WIRE_2;
@@ -141,6 +142,8 @@ assign	SYNTHESIZED_WIRE_16 = SYNTHESIZED_WIRE_11 & SYNTHESIZED_WIRE_85;
 
 assign	SYNTHESIZED_WIRE_72 = ~(ir31_26[31] | ir31_26[29] | ir31_26[30] | ir31_26[27] | SYNTHESIZED_WIRE_84 | ir31_26[26]);
 
+assign	rf_wd_s_ALTERA_SYNTHESIZED[1] = ~(ir31_26[31] | ir31_26[30] | ir31_26[29] | ir31_26[27] | ir31_26[28] | ir31_26[26] | ir5_0[4] | ir5_0[5] | ir5_0[3] | ir5_0[1] | ir5_0[2] | ir5_0[0]);
+
 assign	SYNTHESIZED_WIRE_53 = ~(ir31_26[31] | ir31_26[29] | ir31_26[30] | ir31_26[28] | SYNTHESIZED_WIRE_84 | ir31_26[26]);
 
 assign	SYNTHESIZED_WIRE_23 = ~(ir31_26[31] | ir31_26[29] | ir31_26[30] | ir31_26[27] | SYNTHESIZED_WIRE_84 | ir31_26[26]);
@@ -219,7 +222,7 @@ assign	SYNTHESIZED_WIRE_44 = SYNTHESIZED_WIRE_51 | SYNTHESIZED_WIRE_52;
 
 assign	pc_s_ALTERA_SYNTHESIZED[0] = SYNTHESIZED_WIRE_53 & ir31_26[27];
 
-assign	rf_wd_s = SYNTHESIZED_WIRE_54 | SYNTHESIZED_WIRE_86;
+assign	rf_wd_s_ALTERA_SYNTHESIZED[0] = SYNTHESIZED_WIRE_54 | SYNTHESIZED_WIRE_86;
 
 assign	alu_op_ALTERA_SYNTHESIZED[2] = SYNTHESIZED_WIRE_56 | SYNTHESIZED_WIRE_86;
 
@@ -274,6 +277,7 @@ SameBit	b2v_sameBitUnit(
 
 assign	alu_op = alu_op_ALTERA_SYNTHESIZED;
 assign	pc_s = pc_s_ALTERA_SYNTHESIZED;
+assign	rf_wd_s = rf_wd_s_ALTERA_SYNTHESIZED;
 assign	alu_op_ALTERA_SYNTHESIZED[4] = 0;
 
 endmodule

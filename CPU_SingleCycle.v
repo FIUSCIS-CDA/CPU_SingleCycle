@@ -15,7 +15,7 @@
 
 // PROGRAM		"Quartus Prime"
 // VERSION		"Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition"
-// CREATED		"Tue May 17 14:44:56 2022"
+// CREATED		"Tue Dec 20 14:20:42 2022"
 
 module CPU_SingleCycle(
 	clk,
@@ -54,8 +54,9 @@ wire	[1:0] pc_s;
 wire	[4:0] rf_wa;
 wire	rf_wa_s;
 wire	[31:0] rf_wd;
-wire	rf_wd_s;
+wire	[1:0] rf_wd_s;
 wire	rf_we;
+wire	[31:0] sll_output;
 
 
 
@@ -66,19 +67,6 @@ MUX2_32	b2v_add2_mux(
 	.A(ir15_0_se),
 	.B(dm_wd),
 	.Y(add2));
-
-
-CTRL	b2v_ctrlUnit(
-	.eq(eq),
-	.ir31_26(ir[31:26]),
-	.ir5_0(ir[5:0]),
-	.rf_wa_s(rf_wa_s),
-	.rf_we(rf_we),
-	.add2_s(add2_s),
-	.rf_wd_s(rf_wd_s),
-	.dm_we(dm_we),
-	.alu_op(alu_op),
-	.pc_s(pc_s));
 
 
 DM_synch	b2v_DM(
@@ -106,6 +94,33 @@ ALU_32	b2v_inst(
 	.Overflow(Overflow),
 	.Zero(eq),
 	.Result(add_sum));
+
+
+CTRL	b2v_inst3(
+	.eq(eq),
+	.ir31_26(ir[31:26]),
+	.ir5_0(ir[5:0]),
+	.rf_wa_s(rf_wa_s),
+	.rf_we(rf_we),
+	.add2_s(add2_s),
+	.dm_we(dm_we),
+	.alu_op(alu_op),
+	.pc_s(pc_s),
+	.rf_wd_s(rf_wd_s));
+
+
+MUX3_32	b2v_inst4(
+	.A(dm_rd),
+	.B(add_sum),
+	.C(sll_output),
+	.S(rf_wd_s),
+	.Y(rf_wd));
+
+
+SLL_32	b2v_inst5(
+	.A(dm_wd),
+	.H(ir[10:6]),
+	.Y(sll_output));
 
 
 Adder_32	b2v_myAdder(
@@ -146,13 +161,6 @@ MUX2_5	b2v_rf_wa_mux(
 	.A(ir[15:11]),
 	.B(ir[20:16]),
 	.Y(rf_wa));
-
-
-MUX2_32	b2v_rf_wd_mux(
-	.S(rf_wd_s),
-	.A(dm_rd),
-	.B(add_sum),
-	.Y(rf_wd));
 
 
 SE16_32	b2v_se(

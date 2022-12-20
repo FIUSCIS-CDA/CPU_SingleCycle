@@ -24,6 +24,7 @@ OPCODE	|	32
        CPU_SingleCycle Single-cycle MIPS CPU
 
 #### SUPPORTED INSTRUCTIONS
+       SLL (FA22)
        SLTI (SP22)
        BNE (SP21)
        ADDI (FA20)

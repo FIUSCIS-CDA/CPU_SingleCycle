@@ -18,6 +18,7 @@ module testbench();
    wire Overflow;
    wire[31:0] PC;
    wire[31:26] OPCODE;
+   wire[5:0] FUNCTCODE;
 ///////////////////////////////////////////////////////////////////////////////////
  
    integer address;
@@ -36,7 +37,7 @@ localparam TERMINALPC=88;
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-   CPU_SingleCycle myCPU(.clk(clk), .reset(rst), .Overflow(Overflow), .OPCODE(OPCODE), .PC(PC));
+   CPU_SingleCycle myCPU(.clk(clk), .reset(rst), .Overflow(Overflow), .FUNCTCODE(FUNCTCODE), .OPCODE(OPCODE), .PC(PC));
    
    initial begin
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -99,8 +100,8 @@ localparam TERMINALPC=88;
           for (address=512; address <= 552; address = address + 4)
           begin
              $display("Testing element %d and element %d", address, address+4);
-             verifyLessEqual32(myCPU.b2v_DM.memory[address >> 4],
-                               myCPU.b2v_DM.memory[(address+4) >> 4]);
+             verifyLessEqual32(myCPU.b2v_DM.memory[address >> 2],
+                               myCPU.b2v_DM.memory[(address+4) >> 2]);
           end
           $display("CPU functional");
           $stop;

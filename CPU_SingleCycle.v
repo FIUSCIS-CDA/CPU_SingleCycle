@@ -15,12 +15,13 @@
 
 // PROGRAM		"Quartus Prime"
 // VERSION		"Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition"
-// CREATED		"Tue Dec 20 14:20:42 2022"
+// CREATED		"Mon Mar 20 08:25:37 2023"
 
 module CPU_SingleCycle(
 	clk,
 	reset,
 	Overflow,
+	FUNCTCODE,
 	OPCODE,
 	PC
 );
@@ -29,6 +30,7 @@ module CPU_SingleCycle(
 input wire	clk;
 input wire	reset;
 output wire	Overflow;
+output wire	[5:0] FUNCTCODE;
 output wire	[31:26] OPCODE;
 output wire	[31:0] PC;
 
@@ -183,6 +185,7 @@ SPLICE_PCJ	b2v_spliceUnitforPC(
 	.pc31_28(pc_out[31:28]),
 	.Y(pc_j));
 
+assign	FUNCTCODE[5:0] = ir[5:0];
 assign	OPCODE[31:26] = ir[31:26];
 assign	PC = pc_out;
 

@@ -15,7 +15,7 @@
 
 // PROGRAM		"Quartus Prime"
 // VERSION		"Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition"
-// CREATED		"Mon Mar 20 08:25:37 2023"
+// CREATED		"Tue Aug 15 17:07:01 2023"
 
 module CPU_SingleCycle(
 	clk,
@@ -35,16 +35,17 @@ output wire	[31:26] OPCODE;
 output wire	[31:0] PC;
 
 wire	[31:0] add1;
-wire	[31:0] add2;
 wire	add2_s;
 wire	[31:0] add_sum;
-wire	[4:0] alu_op;
+wire	[6:0] alu_op;
 wire	[31:0] dm_rd;
 wire	[31:0] dm_wd;
 wire	dm_we;
 wire	eq;
 wire	[31:0] ir;
 wire	[31:0] ir15_0_se;
+wire	[31:0] LO_Q;
+wire	lo_we;
 wire	[17:0] offset_times_4;
 wire	[31:0] offset_times_4_se;
 wire	[31:0] pc_beq;
@@ -55,10 +56,10 @@ wire	[31:0] pc_out;
 wire	[1:0] pc_s;
 wire	[4:0] rf_wa;
 wire	rf_wa_s;
-wire	[31:0] rf_wd;
 wire	[1:0] rf_wd_s;
 wire	rf_we;
-wire	[31:0] sll_output;
+wire	[31:0] SYNTHESIZED_WIRE_0;
+wire	[31:0] SYNTHESIZED_WIRE_1;
 
 
 
@@ -68,7 +69,7 @@ MUX2_32	b2v_add2_mux(
 	.S(add2_s),
 	.A(ir15_0_se),
 	.B(dm_wd),
-	.Y(add2));
+	.Y(SYNTHESIZED_WIRE_0));
 
 
 DM_synch	b2v_DM(
@@ -92,13 +93,14 @@ INC4_32	b2v_inc4(
 ALU_32	b2v_inst(
 	.A(add1),
 	.alu_op(alu_op),
-	.B(add2),
+	.B(SYNTHESIZED_WIRE_0),
+	.H(ir[10:6]),
 	.Overflow(Overflow),
 	.Zero(eq),
 	.Result(add_sum));
 
 
-CTRL	b2v_inst3(
+CTRL	b2v_inst6(
 	.eq(eq),
 	.ir31_26(ir[31:26]),
 	.ir5_0(ir[5:0]),
@@ -106,23 +108,26 @@ CTRL	b2v_inst3(
 	.rf_we(rf_we),
 	.add2_s(add2_s),
 	.dm_we(dm_we),
+	.lo_we(lo_we),
 	.alu_op(alu_op),
 	.pc_s(pc_s),
 	.rf_wd_s(rf_wd_s));
 
 
-MUX3_32	b2v_inst4(
+MUX3_32	b2v_inst8(
 	.A(dm_rd),
 	.B(add_sum),
-	.C(sll_output),
+	.C(LO_Q),
 	.S(rf_wd_s),
-	.Y(rf_wd));
+	.Y(SYNTHESIZED_WIRE_1));
 
 
-SLL_32	b2v_inst5(
-	.A(dm_wd),
-	.H(ir[10:6]),
-	.Y(sll_output));
+Flopenr_32	b2v_LO(
+	.reset(reset),
+	.clk(clk),
+	.E(lo_we),
+	.D(add_sum),
+	.Q(LO_Q));
 
 
 Adder_32	b2v_myAdder(
@@ -153,7 +158,7 @@ RF	b2v_rf(
 	.r1a(ir[25:21]),
 	.r2a(ir[20:16]),
 	.wa(rf_wa),
-	.wd(rf_wd),
+	.wd(SYNTHESIZED_WIRE_1),
 	.r1d(add1),
 	.r2d(dm_wd));
 

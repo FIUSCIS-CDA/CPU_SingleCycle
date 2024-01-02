@@ -1,6 +1,6 @@
-// Copyright (C) 2020  Intel Corporation. All rights reserved.
+// Copyright (C) 2018  Intel Corporation. All rights reserved.
 // Your use of Intel Corporation's design tools, logic functions 
-// and other software and tools, and any partner logic 
+// and other software and tools, and its AMPP partner logic 
 // functions, and any output files from any of the foregoing 
 // (including device programming or simulation files), and any 
 // associated documentation or information are expressly subject 
@@ -10,12 +10,11 @@
 // agreement, including, without limitation, that your use is for
 // the sole purpose of programming logic devices manufactured by
 // Intel and sold by Intel or its authorized distributors.  Please
-// refer to the applicable agreement for further details, at
-// https://fpgasoftware.intel.com/eula.
+// refer to the applicable agreement for further details.
 
 // PROGRAM		"Quartus Prime"
-// VERSION		"Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition"
-// CREATED		"Tue Aug 15 17:07:01 2023"
+// VERSION		"Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition"
+// CREATED		"Tue Jan 02 14:53:45 2024"
 
 module CPU_SingleCycle(
 	clk,
@@ -35,11 +34,11 @@ output wire	[31:26] OPCODE;
 output wire	[31:0] PC;
 
 wire	[31:0] add1;
+wire	[31:0] add2;
 wire	add2_s;
 wire	[31:0] add_sum;
 wire	[6:0] alu_op;
 wire	[31:0] dm_rd;
-wire	[31:0] dm_wd;
 wire	dm_we;
 wire	eq;
 wire	[31:0] ir;
@@ -58,8 +57,8 @@ wire	[4:0] rf_wa;
 wire	rf_wa_s;
 wire	[1:0] rf_wd_s;
 wire	rf_we;
-wire	[31:0] SYNTHESIZED_WIRE_0;
-wire	[31:0] SYNTHESIZED_WIRE_1;
+wire	[31:0] SYNTHESIZED_WIRE_3;
+wire	[31:0] SYNTHESIZED_WIRE_2;
 
 
 
@@ -68,15 +67,15 @@ wire	[31:0] SYNTHESIZED_WIRE_1;
 MUX2_32	b2v_add2_mux(
 	.S(add2_s),
 	.A(ir15_0_se),
-	.B(dm_wd),
-	.Y(SYNTHESIZED_WIRE_0));
+	.B(SYNTHESIZED_WIRE_3),
+	.Y(add2));
 
 
 DM_synch	b2v_DM(
 	.clk(clk),
 	.we(dm_we),
 	.a(add_sum),
-	.wd(dm_wd),
+	.wd(SYNTHESIZED_WIRE_3),
 	.rd(dm_rd));
 
 
@@ -93,7 +92,7 @@ INC4_32	b2v_inc4(
 ALU_32	b2v_inst(
 	.A(add1),
 	.alu_op(alu_op),
-	.B(SYNTHESIZED_WIRE_0),
+	.B(add2),
 	.H(ir[10:6]),
 	.Overflow(Overflow),
 	.Zero(eq),
@@ -119,7 +118,7 @@ MUX3_32	b2v_inst8(
 	.B(add_sum),
 	.C(LO_Q),
 	.S(rf_wd_s),
-	.Y(SYNTHESIZED_WIRE_1));
+	.Y(SYNTHESIZED_WIRE_2));
 
 
 Flopenr_32	b2v_LO(
@@ -158,9 +157,9 @@ RF	b2v_rf(
 	.r1a(ir[25:21]),
 	.r2a(ir[20:16]),
 	.wa(rf_wa),
-	.wd(SYNTHESIZED_WIRE_1),
+	.wd(SYNTHESIZED_WIRE_2),
 	.r1d(add1),
-	.r2d(dm_wd));
+	.r2d(SYNTHESIZED_WIRE_3));
 
 
 MUX2_5	b2v_rf_wa_mux(

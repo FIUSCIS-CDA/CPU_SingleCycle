@@ -6,24 +6,27 @@
        MUX3_32,  INC4_32,  SPLICE_PCJ,  Adder_32,  OneBitAdder,  MUX3,  Flopr,
        DSwitch,  CTRL,  ALU_32,  RF,  Flopenr_32,  MUX32_32, MUX32, Decoder_32,
        Flopenr, DESwitch, ALUBit31, ALUBits0To30, MUX4, DM_synch, Grounder, IM,
-       OverflowDetection
+       OverflowDetection, Sixteen
 
 #### INPUTS
 Name  | Size(Bits)
 -------|------------
 clk  |     1      
 reset |     1      
+
+#### OUTPUTS
+Name  | Size(Bits)
+-------|------------
 Overflow|	1
 PC	|	32
 OPCODE	|	32
-
-#### OUTPUTS
-       None
+FUNCTCODE |     32
 
 #### DESCRIPTION
        CPU_SingleCycle Single-cycle MIPS CPU
 
 #### SUPPORTED INSTRUCTIONS
+       LUI (FA23)
        MFLO (SP23)
        MULT (SP23)
        SLL (FA22)

@@ -69,9 +69,9 @@ https://fpgasoftware.intel.com/eula.
 	(port
 		(pt 224 80)
 		(output)
-		(text "add2_s" (rect 0 0 44 19)(font "Intel Clear" (font_size 8)))
-		(text "add2_s" (rect 159 75 203 94)(font "Intel Clear" (font_size 8)))
-		(line (pt 224 80)(pt 208 80))
+		(text "add2_s[1..0]" (rect 0 0 75 19)(font "Intel Clear" (font_size 8)))
+		(text "add2_s[1..0]" (rect 128 75 203 94)(font "Intel Clear" (font_size 8)))
+		(line (pt 224 80)(pt 208 80)(line_width 3))
 	)
 	(port
 		(pt 224 96)

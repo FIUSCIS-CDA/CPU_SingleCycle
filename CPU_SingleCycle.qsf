@@ -61,6 +61,7 @@ set_global_assignment -name BDF_FILE ../SL2_16/SL2_16.bdf
 set_global_assignment -name BDF_FILE ../MUX2_5/MUX2_5.bdf
 set_global_assignment -name BDF_FILE ../MUX2_32/MUX2_32.bdf
 set_global_assignment -name BDF_FILE ../SE16_32/SE16_32.bdf
+set_global_assignment -name BDF_FILE ../ZE16_32/ZE16_32.bdf
 set_global_assignment -name BDF_FILE ../SameBit/SameBit.bdf
 set_global_assignment -name BDF_FILE ../MUX2/MUX2.bdf
 set_global_assignment -name VERILOG_FILE ../IM/IM.v
@@ -93,5 +94,22 @@ set_global_assignment -name BDF_FILE ../SLL_32/SLL_32.bdf
 
 set_global_assignment -name BDF_FILE ../Multiplier_32/Multiplier_32.bdf
 set_global_assignment -name BDF_FILE ../OneBitAdderHalf/OneBitAdderHalf.bdf
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name BDF_FILE ../Sixteen/Sixteen.bdf
+set_global_assignment -name BDF_FILE ../Instructions/ADD.bdf
+set_global_assignment -name BDF_FILE ../Instructions/SW.bdf
+set_global_assignment -name BDF_FILE ../Instructions/SUB.bdf
+set_global_assignment -name BDF_FILE ../Instructions/SLTI.bdf
+set_global_assignment -name BDF_FILE ../Instructions/SLT.bdf
+set_global_assignment -name BDF_FILE ../Instructions/SLL.bdf
+set_global_assignment -name BDF_FILE ../Instructions/ORR.bdf
+set_global_assignment -name BDF_FILE ../Instructions/ORI.bdf
+set_global_assignment -name BDF_FILE ../Instructions/MULT.bdf
+set_global_assignment -name BDF_FILE ../Instructions/MFLO.bdf
+set_global_assignment -name BDF_FILE ../Instructions/LW.bdf
+set_global_assignment -name BDF_FILE ../Instructions/LUI.bdf
+set_global_assignment -name BDF_FILE ../Instructions/J.bdf
+set_global_assignment -name BDF_FILE ../Instructions/BNE.bdf
+set_global_assignment -name BDF_FILE ../Instructions/BEQ.bdf
+set_global_assignment -name BDF_FILE ../Instructions/ANDD.bdf
+set_global_assignment -name BDF_FILE ../Instructions/ADDI.bdf
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

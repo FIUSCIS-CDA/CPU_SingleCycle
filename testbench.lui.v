@@ -33,7 +33,7 @@ localparam CLK_PERIOD=200;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CPU will check if the array sorted if PC hits this value
 // Set to location of doneloop1 below
-localparam TERMINALPC=4;
+localparam TERMINALPC=8;
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -43,6 +43,7 @@ localparam TERMINALPC=4;
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Initialize Instruction Memory with MIPS Code              //          INSTRUCTION                      PC
       myCPU.b2v_im.memory[0] = 'b00111100000010000000000000000001; //          lui $t0, 1	 		0	
+      myCPU.b2v_im.memory[1] = 'b00110101000010000000000000000001; //          ori $t0, $t0, 1	 		4	
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
       /////////////////////////////////////////////////////////////////////////////////////////////
@@ -61,7 +62,7 @@ localparam TERMINALPC=4;
         if(PC === TERMINALPC) begin
              $display("Testing lui with immediate=1");
              verifyEqual32(myCPU.b2v_rf.contents_t0,
-                               65536);
+                               65537);
           $display("CPU functional");
           $stop;
          end

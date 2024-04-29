@@ -15,7 +15,7 @@
 
 // PROGRAM		"Quartus Prime"
 // VERSION		"Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition"
-// CREATED		"Wed Jan 03 15:50:48 2024"
+// CREATED		"Mon Apr 29 15:01:49 2024"
 
 module CPU_SingleCycle(
 	clk,
@@ -36,7 +36,7 @@ output wire	[31:0] PC;
 
 wire	[31:0] add1;
 wire	[31:0] add2;
-wire	add2_s;
+wire	[1:0] add2_s;
 wire	[31:0] add_sum;
 wire	[6:0] alu_op;
 wire	[31:0] dm_rd;
@@ -44,9 +44,9 @@ wire	dm_we;
 wire	eq;
 wire	[31:0] ir;
 wire	[31:0] ir15_0_se;
+wire	[31:0] ir15_0_ze;
 wire	[31:0] LO_Q;
 wire	lo_we;
-wire	[17:0] offset_times_4;
 wire	[31:0] offset_times_4_se;
 wire	[31:0] pc_beq;
 wire	[31:0] pc_inc4;
@@ -59,20 +59,14 @@ wire	rf_wa_s;
 wire	[1:0] rf_wd_s;
 wire	rf_we;
 wire	[4:0] shamt;
+wire	shamt_s;
 wire	[31:0] SYNTHESIZED_WIRE_5;
 wire	[31:0] SYNTHESIZED_WIRE_2;
-wire	SYNTHESIZED_WIRE_3;
-wire	[4:0] SYNTHESIZED_WIRE_4;
+wire	[4:0] SYNTHESIZED_WIRE_3;
+wire	[17:0] SYNTHESIZED_WIRE_4;
 
 
 
-
-
-MUX2_32	b2v_add2_mux(
-	.S(add2_s),
-	.A(ir15_0_se),
-	.B(SYNTHESIZED_WIRE_5),
-	.Y(add2));
 
 
 ALU_32	b2v_ALU(
@@ -83,21 +77,6 @@ ALU_32	b2v_ALU(
 	.Overflow(Overflow),
 	.Zero(eq),
 	.Result(add_sum));
-
-
-CTRL	b2v_ctrlUnit(
-	.eq(eq),
-	.ir31_26(ir[31:26]),
-	.ir5_0(ir[5:0]),
-	.shamt_s(SYNTHESIZED_WIRE_3),
-	.rf_wa_s(rf_wa_s),
-	.rf_we(rf_we),
-	.add2_s(add2_s),
-	.dm_we(dm_we),
-	.lo_we(lo_we),
-	.alu_op(alu_op),
-	.pc_s(pc_s),
-	.rf_wd_s(rf_wd_s));
 
 
 DM_synch	b2v_DM(
@@ -118,8 +97,36 @@ INC4_32	b2v_inc4(
 	.S(pc_inc4));
 
 
+MUX3_32	b2v_inst(
+	.A(ir15_0_se),
+	.B(SYNTHESIZED_WIRE_5),
+	.C(ir15_0_ze),
+	.S(add2_s),
+	.Y(add2));
+
+
 Sixteen	b2v_inst1(
-	.Y(SYNTHESIZED_WIRE_4));
+	.Y(SYNTHESIZED_WIRE_3));
+
+
+CTRL	b2v_inst3(
+	.eq(eq),
+	.ir31_26(ir[31:26]),
+	.ir5_0(ir[5:0]),
+	.shamt_s(shamt_s),
+	.rf_wa_s(rf_wa_s),
+	.rf_we(rf_we),
+	.dm_we(dm_we),
+	.lo_we(lo_we),
+	.add2_s(add2_s),
+	.alu_op(alu_op),
+	.pc_s(pc_s),
+	.rf_wd_s(rf_wd_s));
+
+
+ZE16_32	b2v_inst4(
+	.A(ir[15:0]),
+	.Y(ir15_0_ze));
 
 
 Flopenr_32	b2v_LO(
@@ -184,20 +191,20 @@ SE16_32	b2v_se(
 
 
 MUX2_5	b2v_shamt_mux(
-	.S(SYNTHESIZED_WIRE_3),
+	.S(shamt_s),
 	.A(ir[10:6]),
-	.B(SYNTHESIZED_WIRE_4),
+	.B(SYNTHESIZED_WIRE_3),
 	.Y(shamt));
 
 
 SE18_32	b2v_signExt(
-	.A(offset_times_4),
+	.A(SYNTHESIZED_WIRE_4),
 	.Y(offset_times_4_se));
 
 
 SL2_16	b2v_spliceUnit(
 	.A(ir[15:0]),
-	.Y(offset_times_4));
+	.Y(SYNTHESIZED_WIRE_4));
 
 
 SPLICE_PCJ	b2v_spliceUnitforPC(

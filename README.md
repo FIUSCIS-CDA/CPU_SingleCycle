@@ -6,7 +6,7 @@
        MUX3_32,  INC4_32,  SPLICE_PCJ,  Adder_32,  OneBitAdder,  MUX3,  Flopr,
        DSwitch,  CTRL,  ALU_32,  RF,  Flopenr_32,  MUX32_32, MUX32, Decoder_32,
        Flopenr, DESwitch, ALUBit31, ALUBits0To30, MUX4, DM_synch, Grounder, IM,
-       OverflowDetection, Sixteen
+       OverflowDetection, Sixteen, ZE16_32
 
 #### INPUTS
 Name  | Size(Bits)
@@ -26,6 +26,7 @@ FUNCTCODE |     32
        CPU_SingleCycle Single-cycle MIPS CPU
 
 #### SUPPORTED INSTRUCTIONS
+       ORI (SP24)
        LUI (FA23)
        MFLO (SP23)
        MULT (SP23)

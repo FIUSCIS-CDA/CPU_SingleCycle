@@ -52,10 +52,18 @@ set_global_assignment -name EDA_INPUT_DATA_FORMAT VQM -section_id eda_design_syn
 set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
 set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
-set_global_assignment -name BDF_FILE CPU_SingleCycle.bdf
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+
+
+
+set_global_assignment -name BDF_FILE ../Instructions/JR.bdf
+set_global_assignment -name BDF_FILE ../Instructions/JAL.bdf
+set_global_assignment -name BDF_FILE ../Instructions/BLEZ.bdf
+set_global_assignment -name BDF_FILE ../Instructions/BGEZ.bdf
+set_global_assignment -name BDF_FILE ../Instructions/ANDI.bdf
+set_global_assignment -name BDF_FILE CPU_SingleCycle.bdf
 set_global_assignment -name BDF_FILE ../SE18_32/SE18_32.bdf
 set_global_assignment -name BDF_FILE ../SL2_16/SL2_16.bdf
 set_global_assignment -name BDF_FILE ../MUX2_5/MUX2_5.bdf
@@ -90,8 +98,6 @@ set_global_assignment -name BDF_FILE ../ALU_32/ALU_32.bdf
 set_global_assignment -name BDF_FILE ../ALU_32/OverflowDetection.bdf
 set_global_assignment -name BDF_FILE ../Grounder/Grounder.bdf
 set_global_assignment -name BDF_FILE ../SLL_32/SLL_32.bdf
-
-
 set_global_assignment -name BDF_FILE ../Multiplier_32/Multiplier_32.bdf
 set_global_assignment -name BDF_FILE ../OneBitAdderHalf/OneBitAdderHalf.bdf
 set_global_assignment -name BDF_FILE ../Sixteen/Sixteen.bdf
@@ -112,4 +118,9 @@ set_global_assignment -name BDF_FILE ../Instructions/BNE.bdf
 set_global_assignment -name BDF_FILE ../Instructions/BEQ.bdf
 set_global_assignment -name BDF_FILE ../Instructions/ANDD.bdf
 set_global_assignment -name BDF_FILE ../Instructions/ADDI.bdf
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name BDF_FILE ../MUX4_32/MUX4_32.bdf
+set_global_assignment -name BDF_FILE ../ThirtyOne/ThirtyOne.bdf
+set_global_assignment -name BDF_FILE ../MUX3_5/MUX3_5.bdf
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

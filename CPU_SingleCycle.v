@@ -15,7 +15,7 @@
 
 // PROGRAM		"Quartus Prime"
 // VERSION		"Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition"
-// CREATED		"Mon Apr 29 15:01:49 2024"
+// CREATED		"Tue Jan 14 14:43:05 2025"
 
 module CPU_SingleCycle(
 	clk,
@@ -47,6 +47,7 @@ wire	[31:0] ir15_0_se;
 wire	[31:0] ir15_0_ze;
 wire	[31:0] LO_Q;
 wire	lo_we;
+wire	[17:0] offset_times_4;
 wire	[31:0] offset_times_4_se;
 wire	[31:0] pc_beq;
 wire	[31:0] pc_inc4;
@@ -55,7 +56,7 @@ wire	[31:0] pc_new;
 wire	[31:0] pc_out;
 wire	[1:0] pc_s;
 wire	[4:0] rf_wa;
-wire	rf_wa_s;
+wire	[1:0] rf_wa_s;
 wire	[1:0] rf_wd_s;
 wire	rf_we;
 wire	[4:0] shamt;
@@ -63,7 +64,7 @@ wire	shamt_s;
 wire	[31:0] SYNTHESIZED_WIRE_5;
 wire	[31:0] SYNTHESIZED_WIRE_2;
 wire	[4:0] SYNTHESIZED_WIRE_3;
-wire	[17:0] SYNTHESIZED_WIRE_4;
+wire	[4:0] SYNTHESIZED_WIRE_4;
 
 
 
@@ -77,6 +78,22 @@ ALU_32	b2v_ALU(
 	.Overflow(Overflow),
 	.Zero(eq),
 	.Result(add_sum));
+
+
+CTRL	b2v_ctrl(
+	.eq(eq),
+	.less(add_sum[31]),
+	.ir31_26(ir[31:26]),
+	.ir5_0(ir[5:0]),
+	.shamt_s(shamt_s),
+	.rf_we(rf_we),
+	.lo_we(lo_we),
+	.dm_we(dm_we),
+	.add2_s(add2_s),
+	.alu_op(alu_op),
+	.pc_s(pc_s),
+	.rf_wa_s(rf_wa_s),
+	.rf_wd_s(rf_wd_s));
 
 
 DM_synch	b2v_DM(
@@ -106,27 +123,11 @@ MUX3_32	b2v_inst(
 
 
 Sixteen	b2v_inst1(
+	.Y(SYNTHESIZED_WIRE_4));
+
+
+ThirtyOne	b2v_inst7(
 	.Y(SYNTHESIZED_WIRE_3));
-
-
-CTRL	b2v_inst3(
-	.eq(eq),
-	.ir31_26(ir[31:26]),
-	.ir5_0(ir[5:0]),
-	.shamt_s(shamt_s),
-	.rf_wa_s(rf_wa_s),
-	.rf_we(rf_we),
-	.dm_we(dm_we),
-	.lo_we(lo_we),
-	.add2_s(add2_s),
-	.alu_op(alu_op),
-	.pc_s(pc_s),
-	.rf_wd_s(rf_wd_s));
-
-
-ZE16_32	b2v_inst4(
-	.A(ir[15:0]),
-	.Y(ir15_0_ze));
 
 
 Flopenr_32	b2v_LO(
@@ -143,10 +144,11 @@ Adder_32	b2v_myAdder(
 	.S(pc_beq));
 
 
-MUX3_32	b2v_pcMUX(
+MUX4_32	b2v_pcmux(
 	.A(pc_inc4),
 	.B(pc_j),
 	.C(pc_beq),
+	.D(add1),
 	.S(pc_s),
 	.Y(pc_new));
 
@@ -170,17 +172,19 @@ RF	b2v_rf(
 	.r2d(SYNTHESIZED_WIRE_5));
 
 
-MUX2_5	b2v_rf_wa_mux(
-	.S(rf_wa_s),
+MUX3_5	b2v_rf_wa_mux(
 	.A(ir[15:11]),
 	.B(ir[20:16]),
+	.C(SYNTHESIZED_WIRE_3),
+	.S(rf_wa_s),
 	.Y(rf_wa));
 
 
-MUX3_32	b2v_rf_wd_mux(
+MUX4_32	b2v_rf_wd_mux(
 	.A(dm_rd),
 	.B(add_sum),
 	.C(LO_Q),
+	.D(pc_inc4),
 	.S(rf_wd_s),
 	.Y(SYNTHESIZED_WIRE_2));
 
@@ -193,24 +197,29 @@ SE16_32	b2v_se(
 MUX2_5	b2v_shamt_mux(
 	.S(shamt_s),
 	.A(ir[10:6]),
-	.B(SYNTHESIZED_WIRE_3),
+	.B(SYNTHESIZED_WIRE_4),
 	.Y(shamt));
 
 
 SE18_32	b2v_signExt(
-	.A(SYNTHESIZED_WIRE_4),
+	.A(offset_times_4),
 	.Y(offset_times_4_se));
 
 
 SL2_16	b2v_spliceUnit(
 	.A(ir[15:0]),
-	.Y(SYNTHESIZED_WIRE_4));
+	.Y(offset_times_4));
 
 
 SPLICE_PCJ	b2v_spliceUnitforPC(
 	.ir25_0(ir[25:0]),
 	.pc31_28(pc_out[31:28]),
 	.Y(pc_j));
+
+
+ZE16_32	b2v_ze(
+	.A(ir[15:0]),
+	.Y(ir15_0_ze));
 
 assign	FUNCTCODE[5:0] = ir[5:0];
 assign	OPCODE[31:26] = ir[31:26];

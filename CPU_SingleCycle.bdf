@@ -1208,23 +1208,6 @@ https://fpgasoftware.intel.com/eula.
 	(color 170 255 255)
 )
 (connector
-	(text "eq" (rect 1562 1840 1587 1863)(font "Arial" (color 0 0 255)(font_size 14)(italic)))
-	(pt 184 1864)
-	(pt 1592 1864)
-	(color 0 0 255)
-)
-(connector
-	(pt 1592 1088)
-	(pt 1592 1864)
-	(color 0 0 255)
-)
-(connector
-	(text "dm_we" (rect 1352 1721 1375 1796)(font "Arial" (color 0 0 255)(font_size 14)(italic))(vertical))
-	(pt 1352 920)
-	(pt 1352 1840)
-	(color 0 0 255)
-)
-(connector
 	(pt 880 928)
 	(pt 880 1696)
 	(color 0 0 255)
@@ -1318,18 +1301,8 @@ https://fpgasoftware.intel.com/eula.
 	(color 0 0 255)
 )
 (connector
-	(pt 1352 1840)
-	(pt 480 1840)
-	(color 0 0 255)
-)
-(connector
 	(pt 432 1328)
 	(pt 480 1328)
-)
-(connector
-	(pt 480 1840)
-	(pt 480 1328)
-	(color 0 0 255)
 )
 (connector
 	(pt 880 1696)
@@ -1580,16 +1553,6 @@ https://fpgasoftware.intel.com/eula.
 	(color 0 0 255)
 )
 (connector
-	(pt 1600 1056)
-	(pt 1600 1872)
-)
-(connector
-	(text "add_sum[31]" (rect 1458 1872 1591 1897)(font "Intel Clear" (color 0 0 255)(font_size 14)(italic)))
-	(pt 192 1872)
-	(pt 1600 1872)
-	(color 0 0 255)
-)
-(connector
 	(text "alu_op[6..0]" (rect 514 1736 635 1759)(font "Arial" (color 0 0 255)(font_size 14)(italic)))
 	(pt 464 1760)
 	(pt 1336 1760)
@@ -1632,16 +1595,6 @@ https://fpgasoftware.intel.com/eula.
 	(pt 1568 872)
 	(bus)
 	(color 0 0 0)
-)
-(connector
-	(pt 184 1864)
-	(pt 184 1264)
-	(color 0 0 255)
-)
-(connector
-	(pt 192 1280)
-	(pt 192 1872)
-	(color 0 0 255)
 )
 (connector
 	(text "ir[31..0]" (rect 546 888 620 910)(font "Arial" (color 0 0 0)(font_size 14)))
@@ -2143,6 +2096,53 @@ https://fpgasoftware.intel.com/eula.
 	(pt 1176 680)
 	(pt 952 680)
 	(bus)
+	(color 0 0 255)
+)
+(connector
+	(text "dm_we" (rect 1352 1697 1375 1772)(font "Arial" (color 0 0 255)(font_size 14)(italic))(vertical))
+	(pt 1352 920)
+	(pt 1352 1776)
+	(color 0 0 255)
+)
+(connector
+	(pt 1352 1776)
+	(pt 480 1776)
+	(color 0 0 255)
+)
+(connector
+	(pt 480 1328)
+	(pt 480 1776)
+	(color 0 0 255)
+)
+(connector
+	(text "eq" (rect 1562 1784 1587 1807)(font "Arial" (color 0 0 255)(font_size 14)(italic)))
+	(pt 184 1808)
+	(pt 1592 1808)
+	(color 0 0 255)
+)
+(connector
+	(pt 1592 1088)
+	(pt 1592 1808)
+	(color 0 0 255)
+)
+(connector
+	(pt 184 1264)
+	(pt 184 1808)
+	(color 0 0 255)
+)
+(connector
+	(pt 1600 1056)
+	(pt 1600 1816)
+)
+(connector
+	(text "add_sum[31]" (rect 1458 1816 1591 1841)(font "Intel Clear" (color 0 0 255)(font_size 14)(italic)))
+	(pt 192 1816)
+	(pt 1600 1816)
+	(color 0 0 255)
+)
+(connector
+	(pt 192 1280)
+	(pt 192 1816)
 	(color 0 0 255)
 )
 (junction (pt 1600 1056))

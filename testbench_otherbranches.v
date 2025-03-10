@@ -1,4 +1,4 @@
-module testbench_bgez_functionality();
+module testbench_otherbranches();
 `include "../Test/Test.v"
 //Inputs
 reg reset;

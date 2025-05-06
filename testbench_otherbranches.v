@@ -24,6 +24,8 @@ CPU_SingleCycle myCPU(.clk(clk), .reset(reset), .Overflow(Overflow), .FUNCTCODE(
 
 //program tests
 initial begin
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// BGEZ
 //Test 1
 myCPU.b2v_im.memory[0] = 'b00100000000100000000001000000000; //addi $s0, $zero, 512  		0
 //t0 = -1
@@ -45,7 +47,10 @@ myCPU.b2v_im.memory[9] = 'b00100000000010110000000000000001; //nobranch2: addi $
 myCPU.b2v_im.memory[10] = 'b00000101011000000000000000000001; //bgez $t3, branchto3		40
 myCPU.b2v_im.memory[11] = 'b00001000000000000000000000001101; //j nobranch3 			44
 myCPU.b2v_im.memory[12] = 'b00100010000100000000000000001010; //branchto3: addi $s0, $s0, 10  	48
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// BLEZ
 //Test4
 //t2=5
 //5&6=4
@@ -72,6 +77,34 @@ myCPU.b2v_im.memory[24] = 'b00100000000010111111111111111111; //nobranch5: addi 
 myCPU.b2v_im.memory[25] = 'b00011001011000000000000000000001; //blez $t3, branchto6		100
 myCPU.b2v_im.memory[26] = 'b00001000000000000000000000011100; //j nobranch6 			104
 myCPU.b2v_im.memory[27] = 'b00100010000100000000000000001010; //branchto6: addi $s0, $s0, 10  	108
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// BGTZ
+//Test 1
+myCPU.b2v_im.memory[28] = 'b00100000000100000000001000000000; //addi $s0, $zero, 512  		112
+//t0 = -1
+myCPU.b2v_im.memory[29] = 'b00100000000010001111111111111111; //addi $t0, $zero, -1		116
+myCPU.b2v_im.memory[30] = 'b00011101000000000000000000000001; //bgtz $t0, branchto1		120
+myCPU.b2v_im.memory[31] = 'b00001000000000000000000000100001; //j nobranch1 			124
+myCPU.b2v_im.memory[32] = 'b00100010000100000000000000001010; //branchto1: addi $s0, $s0, 10 	128
+
+//Test 2
+//t1 = 0
+myCPU.b2v_im.memory[33] = 'b00100000000010010000000000000000; //nobranch1: addi $t1, $zero, 0	132
+myCPU.b2v_im.memory[34] = 'b00011101001000000000000000000001; //bgtz $t1, branchto2		136
+myCPU.b2v_im.memory[35] = 'b00001000000000000000000000100101; //j nobranch2			140
+myCPU.b2v_im.memory[36] = 'b00100010000100000000000000001010; //branchto2: addi $s0, $s0, 10 	144
+
+//Test 3
+//t3 = 1
+myCPU.b2v_im.memory[37] = 'b00100000000010110000000000000001; //nobranch2: addi $t3, $zero, 1	148
+myCPU.b2v_im.memory[38] = 'b00011101011000000000000000000001; //bgtz $t3, branchto3		152
+myCPU.b2v_im.memory[39] = 'b00001000000000000000000000101001; //j nobranch3 			156
+myCPU.b2v_im.memory[40] = 'b00100010000100000000000000001010; //branchto3: addi $s0, $s0, 10  	160
+
+
+
 reset <= 1;  # (CLK_PERIOD /2);
 /////////////////////////////////////////////////////////////////////////////////////////////
 reset <= 0;
@@ -80,52 +113,82 @@ end
 
 always@(negedge clk)
 	begin
+///////////////////////////////////////////////////////////////////////////////////////////
+// BGEZ: Three tests:, -1, 0, 1
 	if(PC == 12) begin
-		$display("Passed test 1."); //t0 is -1, should not branch
+		$display("Passed BGEZ test 1."); //t0 is -1, should not branch
 	end
 	if(PC == 16) begin
-		$display("Failed test 1.");
+		$display("Failed BGEZ test 1.");
 		$stop;
 	end
 	if(PC == 32) begin
-		$display("Passed test 2."); //t1 is 0, should branch
+		$display("Passed BGEZ test 2."); //t1 is 0, should branch
 	end
 	if(PC == 28) begin
-		$display("Failed test 2.");
+		$display("Failed BGEZ test 2.");
 		$stop;
 	end
 	if(PC == 48) begin
-		$display("Passed test 3. Functional."); //t2 is 1, should branch
+		$display("Passed BGEZ test 3. Functional."); //t2 is 1, should branch
 	
 	end
 	if(PC == 44) begin
-		$display("Failed test 3.");
+		$display("Failed BGEZ test 3.");
 		$stop;
 	end
         if(PC == 60) begin
            verifyEqual32(myCPU.b2v_rf.contents_t3,
                                4);
 end
+///////////////////////////////////////////////////////////////////////////////////////////
+// BLEZ: Three tests:, -1, 0, 1
+
 	if(PC == 72) begin
-		$display("Passed test 4."); //t0 is 1, should not branch
+		$display("Passed BLEZ test 1."); //t0 is 1, should not branch
 	end
 	if(PC == 76) begin
-		$display("Failed test 4.");
+		$display("Failed BLEZ 1.");
 		$stop;
 	end
 	if(PC == 92) begin
-		$display("Passed test 5."); //t1 is 0, should branch
+		$display("Passed BLEZ test 2."); //t1 is 0, should branch
 	end
 	if(PC == 88) begin
-		$display("Failed test 5.");
+		$display("Failed BLEZ test 2.");
 		$stop;
 	end
 	if(PC == 108) begin
-		$display("Passed test 6. Functional."); //t3 is -1, should branch
-	$stop;
+		$display("Passed BLEZ test 3. Functional."); //t3 is -1, should branch
+
 	end
 	if(PC == 104) begin
-		$display("Failed test 6.");
+		$display("Failed BLEZ test 3.");
+		$stop;
+	end
+///////////////////////////////////////////////////////////////////////////////////////////
+// BGTZ: Three tests:, -1, 0, 1
+
+	if(PC == 124) begin
+		$display("Passed BGTZ test 1."); //t0 is 1, should not branch
+	end
+	if(PC == 128) begin
+		$display("Failed BGTZ 1.");
+		$stop;
+	end
+	if(PC == 140) begin
+		$display("Passed BGTZ test 2."); //t1 is 0, should not branch
+	end
+	if(PC == 144) begin
+		$display("Failed BGTZ test 2.");
+		$stop;
+	end
+	if(PC == 160) begin
+		$display("Passed BGTZ test 3. Functional."); //t3 is -1, should branch
+	$stop;
+	end
+	if(PC == 156) begin
+		$display("Failed BGTZ test 3.");
 		$stop;
 	end
 

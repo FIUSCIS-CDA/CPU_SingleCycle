@@ -26,6 +26,7 @@ FUNCTCODE |     32
        CPU_SingleCycle Single-cycle MIPS CPU
 
 #### SUPPORTED INSTRUCTIONS
+       BGTZ (SP25)
        JR (FA24)
        JAL (FA24)
        ANDI (FA24)
